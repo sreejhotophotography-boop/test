@@ -114,9 +114,6 @@ function Splash({ onEnter }: { onEnter: () => void }) {
       >
         Tap to Enter
       </motion.button>
-      <p className="mt-6 text-xs uppercase tracking-[0.3em] text-[var(--gold-soft)]/60">
-        Music will begin softly
-      </p>
     </motion.div>
   );
 }
