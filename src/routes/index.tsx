@@ -28,8 +28,10 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [entered, setEntered] = useState(false);
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+      {!entered && <Splash onEnter={() => setEntered(true)} />}
       <Petals />
       <BackgroundMusic />
       <Hero />
@@ -55,6 +57,67 @@ function Index() {
       <Compliments />
       <Footer />
     </main>
+  );
+}
+
+/* ---------- Welcome Splash ---------- */
+
+function Splash({ onEnter }: { onEnter: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center px-6 text-center"
+      style={{
+        backgroundImage: `linear-gradient(rgba(40,8,8,0.85), rgba(40,8,8,0.92)), url(${bgTexture})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <motion.img
+        src={ganesha}
+        alt="Lord Ganesha"
+        initial={{ opacity: 0, y: -20, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        className="h-40 md:h-56 w-auto drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+      />
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+        className="mt-6 font-script italic text-base md:text-lg tracking-[0.35em] uppercase text-[var(--gold-soft)]"
+      >
+        Ayyapusetty's
+      </motion.p>
+      <motion.h1
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.9 }}
+        className="mt-2 font-display text-3xl md:text-5xl text-[var(--gold)] leading-tight"
+      >
+        Wedding Invitation
+      </motion.h1>
+      <Ornament className="mx-auto mt-6 h-8 w-64 opacity-80" />
+      <motion.button
+        onClick={onEnter}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{
+          opacity: 1,
+          scale: [1, 1.06, 1],
+        }}
+        transition={{
+          opacity: { delay: 1.1, duration: 0.5 },
+          scale: { delay: 1.1, duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+        }}
+        className="mt-10 rounded-full gold-border bg-[var(--maroon-deep)] px-10 py-4 text-sm md:text-base font-semibold uppercase tracking-[0.3em] text-[var(--gold-soft)] shadow-gold"
+      >
+        Tap to Enter
+      </motion.button>
+      <p className="mt-6 text-xs uppercase tracking-[0.3em] text-[var(--gold-soft)]/60">
+        Music will begin softly
+      </p>
+    </motion.div>
   );
 }
 
