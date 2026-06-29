@@ -1,3 +1,13 @@
+# Netlify deployment config for this TanStack Start app.
+# The build runs Vite + Nitro with the Netlify preset, which emits
+# a static `dist/` folder and a serverless function for SSR.
+
+[build]
+  command = "bun run build"
+  publish = "dist"
+  environment = { NITRO_PRESET = "netlify", NODE_VERSION = "20" }
+
+# SPA fallback so client-side routes resolve on refresh / deep links.
 [[redirects]]
   from = "/*"
   to = "/index.html"
